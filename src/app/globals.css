@@ -1,1 +1,180 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+:root {
+  --background: 240 10% 4%; /* Fundo quase preto */
+  --foreground: 0 0% 98%; /* Texto branco */
+  
+  --primary: 158 64% 52%; /* Verde terminal */
+  --primary-foreground: 240 10% 4%;
+  
+  --secondary: 215 16% 47%; /* Cinza terminal */
+  --secondary-foreground: 0 0% 98%;
+  
+  --muted: 240 4% 16%;
+  --muted-foreground: 215 16% 47%;
+  
+  --border: 240 4% 20%;
+  --input: 240 4% 20%;
+  --ring: 158 64% 52%;
+  
+  --radius: 0.25rem; /* Bordas menos arredondadas */
+  
+  /* Cores específicas para terminal */
+  --command: 158 64% 52%;
+  --error: 0 84% 60%;
+  --directory: 221 83% 53%;
+}
+
+/* Fonte monoespaçada para todo o site */
+body {
+  font-family: 'Fira Code', monospace;
+}
+
+/* Efeito de cursor piscante */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+}
+
+/* Estilo de scrollbar para terminal */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+.dark {
+  --background: 222.2 47% 4%; /* Fundo escuro mais tecnológico */
+  --foreground: 210 40% 98%;
+
+  --card: 222.2 47% 6%;
+  --card-foreground: 210 40% 98%;
+
+  --primary: 217.2 91.2% 65%; /* Azul mais brilhante no escuro */
+  --primary-foreground: 222.2 47% 11%;
+
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+
+  /* Novas cores tech modo escuro */
+  --code: 227 100% 87%;
+  --network: 143 65% 65%;
+}
+
+/* Efeitos tecnológicos */
+body {
+  @apply bg-[length:100%_100%] bg-no-repeat;
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      hsla(var(--primary) / 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      hsla(var(--network) / 0.1) 0%,
+      transparent 50%
+    );
+}
+
+.dark body {
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      hsla(var(--primary) / 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      hsla(var(--network) / 0.05) 0%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to bottom right,
+      transparent 48%,
+      hsla(var(--primary) / 0.1) 49%,
+      hsla(var(--primary) / 0.1) 51%,
+      transparent 52%
+    );
+}
+
+/* Estilo para blocos de código */
+.code-block {
+  @apply relative overflow-hidden rounded-lg border;
+  background: hsl(var(--background));
+}
+
+.code-block::before {
+  content: "";
+  @apply absolute inset-0 bg-[length:40px_40px];
+  background-image: linear-gradient(
+      to right,
+      hsl(var(--border)) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+  opacity: 0.15;
+}
+
