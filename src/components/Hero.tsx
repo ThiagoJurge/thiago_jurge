@@ -9,7 +9,11 @@ export default function Hero() {
         className="border-primary text-primary hover:bg-primary/10 flex justify-center items-center"
         asChild
       >
-        <a href="#projects" aria-label="Acessar seção de projetos / curriculum">
+        <a
+          href="https://docs.google.com/document/d/1tfR5bFDk4arQjjVNiu7dchjwpgWPHI8vXgPjl88Julg/edit?usp=drivesdk"
+          aria-label="Acessar seção de projetos / curriculum"
+          target="_blank"
+        >
           <span className="flex items-center">
             [CURRICULUM]
             <Download className="ml-2 h-4 w-4" />
@@ -43,7 +47,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex gap-4 pb-4">
           <Button
             variant="outline"
             className="border-primary text-primary hover:bg-primary/10"
@@ -63,6 +67,16 @@ export default function Hero() {
             </a>
           </Button>
         </div>
+
+        <Button
+          variant="outline"
+          className="border-primary text-primary hover:bg-primary/10"
+          asChild
+        >
+          <a href="https://github.com/ThiagoJurge" target="_blank">
+            <span className="text-primary">[GITHUB]</span>
+          </a>
+        </Button>
       </div>
     </section>
   );
