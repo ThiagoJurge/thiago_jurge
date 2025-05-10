@@ -23,7 +23,7 @@ const skills = [
   },
   {
     category: "Networking",
-    items: ["TCP/IP", "BGP", "DNS", "Routing and Switching"],
+    items: ["TCP/IP", "BGP", "MPLS", "OSPF", "Routing and Switching"],
   },
 ];
 
