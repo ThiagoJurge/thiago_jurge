@@ -8,10 +8,39 @@ export default function Contact() {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("thiagojurge@hotmail.com").then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    const email = "thiagojurge@hotmail.com";
+
+    if (navigator.clipboard && window.isSecureContext) {
+      // Navegadores modernos e contexto seguro (HTTPS)
+      navigator.clipboard.writeText(email).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    } else {
+      // Fallback para navegadores mais antigos ou HTTP
+      const textArea = document.createElement("textarea");
+      textArea.value = email;
+      textArea.style.position = "fixed";
+      textArea.style.opacity = "0";
+      textArea.style.pointerEvents = "none";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        const successful = document.execCommand("copy");
+        if (successful) {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } else {
+          alert("Não foi possível copiar o email.");
+        }
+      } catch (err) {
+        alert("Erro ao copiar o email: " + err);
+      }
+
+      document.body.removeChild(textArea);
+    }
   };
 
   return (
